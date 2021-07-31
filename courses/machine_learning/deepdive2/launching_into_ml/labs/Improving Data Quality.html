@@ -1,0 +1,632 @@
+
+
+<!DOCTYPE html>
+<html lang='ja'>
+<head>
+<title>Improving Data Quality | Qwiklabs</title>
+<script>
+//<![CDATA[
+window.gon={};gon.current_user={"firstname":"fukuda","lastname":"makoto(福田誠)","fullname":"makoto(福田誠) fukuda","company":"Login with Google","email":"ma-fukuda@skylark.co.jp","origin":"run, direct","subscriptions":1,"id":"353a0634a2eb380bc33ba855695687ac","qlCreatedAt":"2020-03-22 12:04:36 UTC","optIn":false,"current_organization_id":null,"current_organization_role":null};gon.segment="j4Im8pqIko0Lxq4wVVZWMPMM0EroHUvb";gon.deployment="googlecoursera-run";gon.content={"type":"Lab","id":2978,"name":"Improving Data Quality"};
+//]]>
+</script>
+<script>
+  dataLayer = [
+    {user: gon.current_user},
+    {content: gon.content}
+  ];
+</script>
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer',"GTM-TQR88QK");
+</script>
+<script>
+  EVENT_SOURCE_BASE_URL = "https://googlecoursera-run.qwiklabs.com/nchan-sub?id=";
+</script>
+<script src="https://cdn.qwiklabs.com/assets/hallofmirrors/polyfills/webcomponents-loader-bc6366f057e8ef5484398e321627c4f68460bc628567bfa2c568757fb504a477.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/vendor-45d462772c30000424907184f70c7157e95fb6227698d1671c5051818a6f60d8.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/application-7b4cac5d95c12acfbde99d31ff6a34446a8a67039edbaf88d7c5dd4fbd54c3a1.js"></script>
+<script src="https://cdn.qwiklabs.com/assets/hallofmirrors/hallofmirrors__ja-87efe27e13b717c63957c79dcb69bd1a152deb5409a66400a633732094e75413.js"></script>
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js' type='text/javascript'></script>
+<![endif]-->
+<!--[endif]>  <![endif]-->
+<script type='application/ld+json'>
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.qwiklabs.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.qwiklabs.com/catalog?keywords={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key=511e4158-0aec-4e3c-b2e6-4daa1769f51e'></script>
+
+
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="+eiYu7MkZ0ssNcjRVmQxE8GYVyU+LH4+3NLuSlveUB6k9fo4oC1gkh1u79PTnDhn2xudCH9l8mQCSN7JKRnN8w==" />
+<meta content='width=device-width, initial-scale=1.0, user-scalable=yes' name='viewport'>
+<meta content='1rRsY0INj8RvwB5EF5pwdxt2A2P9aDgAlsICaJ0d5w0' name='google-site-verification'>
+<meta content='#3681E4' property='msapplication-TileColor'>
+<meta content='/favicon-144.png' property='msapplication-TileImage'>
+<meta content='[{&quot;id&quot;:&quot;recaptcha_experiment&quot;,&quot;optimize_id&quot;:&quot;dpViOcLkT3qS4TvL2mRojA&quot;,&quot;title&quot;:&quot;No Recaptcha shown for trusted users&quot;,&quot;variant_index&quot;:1,&quot;variant&quot;:&quot;no_recaptcha&quot;}]' name='active-experiments'>
+<meta content='{&quot;userId&quot;:2544031}' name='help-api-product-data'>
+<meta content='このラボでは、整然としていないデータに関するよくある問題をいくつか提示して解決します。なお、問題が異なれば別の解決方法が必要になります。ここでは、このノートブック以外の問題については扱いません。' name='description'>
+<meta content='Qwiklabs' name='author'>
+<meta content='Improving Data Quality | Qwiklabs' property='og:title'>
+<meta content='website' property='og:type'>
+<meta content='/favicon-144.png' property='og:image'>
+<meta content='Qwiklabs' property='og:site_name'>
+<meta content='このラボでは、整然としていないデータに関するよくある問題をいくつか提示して解決します。なお、問題が異なれば別の解決方法が必要になります。ここでは、このノートブック以外の問題については扱いません。' property='og:description'>
+<meta content='/qwiklabs_logo_900x887.png' property='og:logo' size='900x887'>
+<meta content='/qwiklabs_logo_994x187.png' property='og:logo' size='994x187'>
+
+
+<link href='/favicon-32.png' rel='shortcut icon'>
+<link color='#3681E4' href='/favicon-svg.svg' rel='mask-icon'>
+<link href='/favicon-180.png' rel='apple-touch-icon-precomposed'>
+
+
+
+<link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=Oswald:400|Roboto+Mono:400,700|Roboto:300,400,500,700|Google+Sans:300,400,500,700|Google+Sans+Display:400|Material+Icons|Google+Material+Icons" />
+<link rel="stylesheet" media="screen" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP&amp;amp;subset=japanese" />
+<link rel="stylesheet" media="screen" href="https://cdn.qwiklabs.com/assets/application_old/locales/ja-8fe998f5c1b153ebe8b1911e284face0050664ab803398b06c8ff796071a4a31.css" />
+<link rel="stylesheet" media="all" href="https://cdn.qwiklabs.com/assets/application_ja-835a771bb283a93747e7e243b485cb8d913ba40826f63abd1b0fe73b4ec8c748.css" />
+
+<style>
+  :root {
+    --primary-text-on-surface-color: #1A73E8;
+    --primary-surface-color: #1A73E8;
+    --primary-surface-color-rgb: 26,115,232;
+    --primary-surface-color-light: #d1e3fa;
+    --text-on-primary-color: #FFFFFF;
+    --accent-text-on-surface-color: #F29900;
+    --accent-surface-color: #F9AB00;
+    --accent-surface-color-rgb: 249,171,0;
+    --accent-surface-color-light: #ffefcc;
+    --text-on-accent-color: #202124;
+  }
+</style>
+
+
+
+</head>
+<body class='lab-show l-full no-nav application-new focuses focuses-show lab-show l-full no-nav '>
+<noscript>
+<iframe height='0' src='https://www.googletagmanager.com/ns.html?id=GTM-TQR88QK' style='display:none;visibility:hidden;' width='0'></iframe>
+</noscript>
+<span class='hidden' id='flash-sibling-before'></span>
+
+<div class='header-container'>
+<div class='header'>
+<ql-icon-button class='js-nav-toggle header__nav-panel-button l-mrm'>menu</ql-icon-button>
+<div class='header__title'>
+<ql-icon-button label="戻る" href="https://www.coursera.org/" id="c514365ea2e8f8cc" target="_self" tip="戻る">arrow_back</ql-icon-button>
+
+<h1 class='headline-5'>
+Improving Data Quality
+</h1>
+</div>
+<div class='header__actions'>
+<ql-icon-button class='header__button--search js-header-search-bar-button'>search</ql-icon-button>
+<ql-icon-button id='control-panel-target' style='display: none;'>
+dashboard
+</ql-icon-button>
+<ql-menu for='control-panel-target' id='control-panel-menu'></ql-menu>
+
+<ql-icon-button icon='help' id='help-menu-button' label='Open help menu' tip='Help'></ql-icon-button>
+<ql-menu for='help-menu-button' id='help-menu'>
+<ql-menu-item data-analytics-action='opened_help' data-analytics-label='lab' label='Help Center' onclick='hallofmirrors.helpService.startHelp({&quot;productData&quot;:{&quot;userId&quot;:2544031},&quot;context&quot;:&quot;lab&quot;})'></ql-menu-item>
+<ql-menu-item href='https://support.google.com/qwiklabs/contact/contact_us' label='Email support' target='_blank'></ql-menu-item>
+<ql-menu-item label='Chat support' onClick='ql.chat.open()'></ql-menu-item>
+</ql-menu>
+
+<ql-icon-button id='language'>language</ql-icon-button>
+<div class='mdl-menu mdl-menu__bottom-right mdl-js-menu elevation-3' for='language'>
+<a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="ar" href="/focuses/16994597?locale=ar&amp;parent=lti_session">العربية‬‎
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="de" href="/focuses/16994597?locale=de&amp;parent=lti_session">Deutsch
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="en" href="/focuses/16994597?locale=en&amp;parent=lti_session">English
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="es" href="/focuses/16994597?locale=es&amp;parent=lti_session">español (Latinoamérica)
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="fr" href="/focuses/16994597?locale=fr&amp;parent=lti_session">français
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="id" href="/focuses/16994597?locale=id&amp;parent=lti_session">bahasa Indonesia
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="it" href="/focuses/16994597?locale=it&amp;parent=lti_session">Italiano
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="ja" href="/focuses/16994597?locale=ja&amp;parent=lti_session">日本語
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="ko" href="/focuses/16994597?locale=ko&amp;parent=lti_session">한국어
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="pl" href="/focuses/16994597?locale=pl&amp;parent=lti_session">Polski
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="pt_BR" href="/focuses/16994597?locale=pt_BR&amp;parent=lti_session">português (Brasil)
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="pt_PT" href="/focuses/16994597?locale=pt_PT&amp;parent=lti_session">português (Portugal)
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="ru" href="/focuses/16994597?locale=ru&amp;parent=lti_session">русский
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="tr" href="/focuses/16994597?locale=tr&amp;parent=lti_session">Türkçe
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="zh" href="/focuses/16994597?locale=zh&amp;parent=lti_session">简体中文
+</a><a class="mdl-menu__item locale-link" data-analytics-action="changed_locale" data-analytics-label="zh_TW" href="/focuses/16994597?locale=zh_TW&amp;parent=lti_session">繁體中文
+</a></div>
+<ql-icon-button icon='account_circle_filled' id='my_account' label='マイアカウント' tip='マイアカウント'></ql-icon-button>
+<ql-menu for='my_account' id='my_account_menu' style='max-height: 640px'>
+<div class='my-account-menu'>
+<ql-avatar class='l-mtl l-mbl' size='120' src='https://lh3.googleusercontent.com/a-/AOh14GgGSvLEH6WfH-05TERgVUs6YY32DAYP6DHHj2Rm5A=s320-c'></ql-avatar>
+<div class='my-account-menu__user-info l-mbl'>
+<h4 class='ql-subhead-1'>makoto(福田誠) fukuda</h4>
+<p class='ql-body-2 text--light'>ma-fukuda@skylark.co.jp</p>
+<p class='ql-body-2 text--light'>
+</p>
+<a class="text--green ql-subhead-2" href="/my_account/payments"><ql-chip positive>
+月単位のサブスクリプション
+</ql-chip>
+</a></div>
+<div class='buttons l-mbl'>
+<a class="button button--hairline l-mrm" id="profile" href="/public_profiles/18133327-e8c3-4d62-9e5b-2061dc2fc778">プロフィール</a>
+<a class="button button--hairline" id="settings" href="/my_account/profile">設定</a>
+</div>
+<hr>
+<ql-button data-analytics-action='clicked_sign_out' href='/users/sign_out' method='delete'>
+ログアウト
+</ql-button>
+<div class='privacy l-mtl'>
+<a class="ql-caption text--light" href="/privacy_policy">プライバシー</a>
+<span class='ql-caption text--light l-mls l-mrs'>&middot;</span>
+<a class="ql-caption text--light" href="/terms_of_service">利用規約</a>
+</div>
+</div>
+</ql-menu>
+
+</div>
+</div>
+<div class='header__search-bar js-header-search-bar'>
+<form class="js-search-form-mobile" onsubmit="ql.searchFilter(); return false;" action="/searches/elasticsearch" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="/qoFyPh7O01F6cZ+fVV0OhmYduFM7rGigvcl+dKrloejt2dL63I8lHSy4Xz4rX1OAxu8zA2nPfhcbRV6oGwLag==" />
+<input type="text" name="keywords" id="search" placeholder="検索" maxlength="255" aria-label="catalog search bar" />
+</form>
+
+<ql-icon-button class='js-close-search-bar'>close</ql-icon-button>
+</div>
+</div>
+
+<nav class='nav-bar'>
+<a class="nav-bar__item js-navigation-button" href="/"><ql-icon class='nav-bar__item__icon'>
+home
+</ql-icon>
+<span class='nav-bar__item__label'>
+ホーム
+</span>
+</a>
+<a class="nav-bar__item js-navigation-button" href="/catalog"><ql-icon class='nav-bar__item__icon'>
+school
+</ql-icon>
+<span class='nav-bar__item__label'>
+カタログ
+</span>
+</a>
+<a class="nav-bar__item js-navigation-button" href="/my_learning"><ql-icon class='nav-bar__item__icon'>
+event_note
+</ql-icon>
+<span class='nav-bar__item__label'>
+マイラーニング
+</span>
+</a>
+</nav>
+
+<nav class='nav-panel js-nav-panel'>
+<div class='nav-panel__logo'>
+<div class='logo logo--blue' title='ロゴ'></div>
+</div>
+<a title="ホーム" tabindex="-1" class="nav-panel__item js-navigation-button" href="/"><ql-icon class='nav-panel__item__icon'>
+home
+</ql-icon>
+<div class='nav-panel__item__label'>
+ホーム
+</div>
+</a>
+<a title="カタログ" tabindex="-1" class="nav-panel__item js-navigation-button" href="/catalog"><ql-icon class='nav-panel__item__icon'>
+school
+</ql-icon>
+<div class='nav-panel__item__label'>
+カタログ
+</div>
+</a>
+<a title="マイラーニング" tabindex="-1" class="nav-panel__item js-navigation-button" href="/my_learning"><ql-icon class='nav-panel__item__icon'>
+event_note
+</ql-icon>
+<div class='nav-panel__item__label'>
+マイラーニング
+</div>
+</a>
+<div class='nav-panel__spacer'></div>
+<a title="プロフィール" tabindex="-1" class="nav-panel__item js-navigation-button" href="/my_account/profile"><ql-icon class='nav-panel__item__icon'>
+account_circle
+</ql-icon>
+<div class='nav-panel__item__label'>
+プロフィール
+</div>
+</a>
+<a title="クレジットとサブスクリプション" tabindex="-1" class="nav-panel__item js-navigation-button" href="/my_account/credits"><ql-icon class='nav-panel__item__icon'>
+money
+</ql-icon>
+<div class='nav-panel__item__label'>
+クレジットとサブスクリプション
+</div>
+</a>
+<a title="セキュリティ" tabindex="-1" class="nav-panel__item js-navigation-button" href="/my_account/security"><ql-icon class='nav-panel__item__icon'>
+security
+</ql-icon>
+<div class='nav-panel__item__label'>
+セキュリティ
+</div>
+</a>
+<div class='nav-panel__spacer'></div>
+<a class="nav-panel__item" tabindex="-1" href="#"><ql-help>
+<div class='nav-panel__help-item'>
+<ql-icon class='nav-panel__item__icon'>help</ql-icon>
+<div class='nav-panel__item__label'>
+ヘルプ
+</div>
+</div>
+</ql-help>
+</a><div class='nav-panel__small-links'>
+<a tabindex="-1" href="/privacy_policy">プライバシー</a>
+<a tabindex="-1" href="/terms_of_service">利用規約</a>
+</div>
+</nav>
+<div class='nav-panel__overlay js-nav-toggle'></div>
+
+<main class='js-main'>
+<div class='l-main-wrapper' id='main-wrapper'>
+
+
+
+
+
+
+<ql-drawer-container class='js-lab-state' data-analytics-payload='{&quot;label&quot;:&quot;Improving Data Quality&quot;,&quot;lab_name&quot;:&quot;Improving Data Quality&quot;,&quot;classroom_name&quot;:null,&quot;deployment&quot;:&quot;googlecoursera-run&quot;}' data-focus-id='16994597' data-lab-billing-limit='0.0' data-lab-duration='2700' data-parent='lti_session' data-recaptcha-enabled id='lab-container'>
+<ql-drawer id='terminal-drawer' slot='drawer' style='width: calc(100% - 480px)'>
+<iframe allow='clipboard-read' class='terminal' id='embedded-resource'></iframe>
+</ql-drawer>
+<ql-drawer-content class='js-lab-wrapper' id='lab-content' slot='drawer-content'>
+<ql-drawer-container id='lab-content-container'>
+<ql-drawer id='control-panel-drawer' open slot='drawer' width='320'>
+<ql-lab-control-panel class='ql-lab-control-panel__max-height control-panel js-lab-control-panel' connectionFiles='[]' labControlButton='{&quot;disabled&quot;:false,&quot;pending&quot;:false,&quot;running&quot;:false}' labDetails='[]' labTimer='{&quot;ticking&quot;:false,&quot;secondsRemaining&quot;:2700}' studentResources='[]'>
+<script src="https://www.recaptcha.net/recaptcha/api.js?render=6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr"   ></script>
+        <script>
+          // Define function so that we can call it again later if we need to reset it
+          // This executes reCAPTCHA and then calls our callback.
+          function executeRecaptchaForStartLab() {
+            grecaptcha.ready(function() {
+              grecaptcha.execute('6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr', {action: 'start_lab'}).then(function(token) {
+                setInputWithRecaptchaResponseTokenForStartLab('g-recaptcha-response-data-start-lab', token)
+              });
+            });
+          };
+          // Invoke immediately
+          executeRecaptchaForStartLab()
+
+          // Async variant so you can await this function from another async function (no need for
+          // an explicit callback function then!)
+          // Returns a Promise that resolves with the response token.
+          async function executeRecaptchaForStartLabAsync() {
+            return new Promise((resolve, reject) => {
+              grecaptcha.ready(async function() {
+                resolve(await grecaptcha.execute('6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr', {action: 'start_lab'}))
+              });
+            })
+          };
+
+                    var setInputWithRecaptchaResponseTokenForStartLab = function(id, token) {
+            var element = document.getElementById(id);
+            element.value = token;
+          }
+
+        </script>
+<input type="hidden" name="g-recaptcha-response-data[start_lab]" id="g-recaptcha-response-data-start-lab" data-sitekey="6LeVI8IUAAAAAJNdox5eTkYrw9SbvhZ1TFyv3iHr" class="g-recaptcha g-recaptcha-response "/>
+
+<div class='hidden' id='recaptcha-v2-start-lab' slot='recaptcha'>
+<script src="https://www.recaptcha.net/recaptcha/api.js" async defer ></script>
+<div data-sitekey="6LeOI8IUAAAAAPkHlMAE9NReCD_1WD81iYlBlCnV" data-callback="recaptchaComplete" data-expired-callback="expireV2Token" class="g-recaptcha "></div>
+          <noscript>
+            <div>
+              <div style="width: 302px; height: 422px; position: relative;">
+                <div style="width: 302px; height: 422px; position: absolute;">
+                  <iframe
+                    src="https://www.recaptcha.net/recaptcha/api/fallback?k=6LeOI8IUAAAAAPkHlMAE9NReCD_1WD81iYlBlCnV"
+                    name="ReCAPTCHA"
+                    style="width: 302px; height: 422px; border-style: none; border: 0; overflow: hidden;">
+                  </iframe>
+                </div>
+              </div>
+              <div style="width: 300px; height: 60px; border-style: none;
+                bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+                background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+                <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                  class="g-recaptcha-response"
+                  style="width: 250px; height: 40px; border: 1px solid #c1c1c1;
+                  margin: 10px 25px; padding: 0px; resize: none;">
+                </textarea>
+              </div>
+            </div>
+          </noscript>
+
+</div>
+</ql-lab-control-panel>
+</ql-drawer>
+<ql-drawer-content id='lab-instructions' slot='drawer-content'>
+<div class='alert alert--fake js-alert'>
+<p class='alert__message js-alert-message'></p>
+<a class='alert__close js-alert-close'>
+<i class='fa fa-times'></i>
+</a>
+<iframe class='l-ie-iframe-fix'></iframe>
+</div>
+<div class='lab-content__renderable-instructions js-lab-content'>
+<div class='lab-preamble'>
+<h1 class='lab-preamble__title'>
+Improving Data Quality
+</h1>
+<div class='lab-preamble__details subtitle-headline-1'>
+<span>45分</span>
+<span>無料</span>
+<div class='lab__rating'>
+<a aria-label="Lab Reviews" href="/focuses/16994597/reviews?parent=lti_session"><div class='rateit' data-rateit-readonly='true' data-rateit-value='4.0729'></div>
+
+</a></div>
+</div>
+</div>
+
+<div class='markdown-lab-instructions js-markdown-instructions' id='markdown-lab-instructions'>
+
+
+
+<h2 id="step1">概要</h2>
+<p>機械学習モデルが扱えるデータは数値のみで、数値データは 1 または 0 でなければなりません。<em></em><em></em>データが雑然としている、または整然としていないと言われるのは、属性値が欠けている、ノイズや外れ値が含まれている、重複している、データが間違っている、大文字と小文字の列名がある、機械学習アルゴリズムによる取り込みの準備が本質的にできていないといった場合です。<em></em><em></em></p>
+<p>このラボでは、整然としていないデータに関するよくある問題をいくつか提示して解決します。<em></em>なお、問題が異なれば別の解決方法が必要になります。ここでは、このノートブック以外の問題については扱いません。</p>
+<h3><strong>学習内容</strong></h3>
+<p>このラボの内容:</p>
+<ul>
+<li>
+<p>欠損値を解決する。</p>
+</li>
+<li>
+<p>日付の特徴量列を日時形式に変換する。</p>
+</li>
+<li>
+<p>特徴量列の名前を変更し、特徴量列から値を削除する。</p>
+</li>
+<li>
+<p>ワンホット エンコーディングの特徴量列を作成する。</p>
+</li>
+<li>
+<p>時間的な特徴量の変換を理解する。</p>
+</li>
+</ul>
+<h2 id="step2">設定</h2>
+<p>ラボごとに一定の期間、無料で新しい GCP プロジェクトと一連のリソースをご利用いただけます。</p>
+<ol>
+<li>
+<p>Qwiklabs に<strong>シークレット ウィンドウ</strong>でログインします。</p>
+</li>
+<li>
+<p>ラボのアクセス時間（例: <img alt="img/time.png" src="https://cdn.qwiklabs.com/aZQJ4BT7uCmM9XR6BTXgTRP1Hfu1T7q6V%2BcnbdEsbpU%3D">）に注意し、時間内に完了できるよう注意してください。</p>
+</li>
+</ol>
+<aside> <p>
+  一時停止機能はありません。必要な場合はやり直せますが、最初からになります。</p>
+
+</aside>
+<ol start="3">
+<li>
+<p>準備が整ったら <img alt="img/start_lab.png" src="https://cdn.qwiklabs.com/XE8x7uvQokyubNwnYKKc%2BvBBNrMlo5iNZiDDzQQ3Ddo%3D"> をクリックします。</p>
+</li>
+<li>
+<p>ラボの認証情報をメモしておきます。この認証情報は Cloud Platform Console にログインする際に使用します。<img alt="img/open_google_console.png" src="https://cdn.qwiklabs.com/0d78dhX6IVMVWmixCPPSBbmi5O2GPokCXf1Ps1AkTgI%3D"></p>
+</li>
+<li>
+<p>[<strong>Google Console を開く</strong>] をクリックします。</p>
+</li>
+<li>
+<p>[<strong>別のアカウントを使用</strong>] をクリックし、<strong>この</strong>ラボの認証情報をコピーしてプロンプトに貼り付けます。</p>
+</li>
+</ol>
+<aside class="warning"><p>他の認証情報を使用すると、エラーが発生したり、<strong>料金の請求</strong>が発生したりします。</p>
+</aside>
+<ol start="7">
+<li>利用規約に同意し、再設定用のリソースページをスキップします。</li>
+</ol>
+<aside class="warning"><p>
+  ラボを終了する場合や最初からやり直す場合以外は、[<strong>ラボを終了</strong>] をクリックしないでください。クリックすると、作業内容とプロジェクトが削除されます。</p>
+</aside>
+
+<h2 id="step3">AI Platform Notebooks を起動する</h2>
+<p>AI Platform Notebooks を起動するには:</p>
+<p><strong>ステップ 1</strong></p>
+<p>[ナビゲーション メニュー] をクリックします。[AI Platform] から [ノートブック] に移動します。</p>
+<p><img alt="新しいノートブックを開く" src="https://cdn.qwiklabs.com/sj5Z8NGCDyDO08JggmOSLqr6zaxa6KYiNrQ9QNIrr1Y%3D"></p>
+<p><strong>ステップ 2</strong></p>
+<p>[ノートブック インスタンス] ページで <img alt="新しいインスタンス" src="https://cdn.qwiklabs.com/YI0InqyQhTRNsEIGzrufyXjMtsdrwKwspeNXtPlPPeY%3D"> をクリックします。TensorFlow 2.x を選択し、[GPU を使用しない] を選択します。</p>
+<p><img alt="新しい TensorFlow 2.x インスタンス" src="https://cdn.qwiklabs.com/XoalHYoeOlvhs7jtFOoGRhIlXS%2FrGGbFaVnsgDMNHZ4%3D"></p>
+<p>ポップアップで、ディープ ラーニング VM の名前を確認してから、ウィンドウの下部に移動して [作成] をクリックします。</p>
+<p><img alt="新しい VM の作成" src="https://cdn.qwiklabs.com/sfQAlN5skhuPoZuLrVmX4Dva6hA8qKA2zPULKpeO7Uw%3D"></p>
+<p>新しい VM が起動するまでに 2～3 分かかります。</p>
+<p><strong>ステップ 3</strong></p>
+<p>[<strong>JupyterLab を開く</strong>] をクリックします。JupyterLab ウィンドウが新しいタブで開きます。</p>
+<p><img alt="JupyterLab" src="https://cdn.qwiklabs.com/IIq%2BaFwb0isqeldQPr45%2FFizD9QIJ5cX401SaSfXqnE%3D"></p>
+
+<h2 id="step4">AI Platform Notebooks インスタンス内でコース リポジトリのクローンを作成する</h2>
+<p><code>training-data-analyst</code> ノートブックのクローンを JupyterLab インスタンス内に作成するには:</p>
+<p><strong>ステップ 1</strong></p>
+<p>JupyterLab で、[Terminal] アイコンをクリックして新しいターミナルを開きます。</p>
+<p><img alt="ターミナルを開く" src="https://cdn.qwiklabs.com/mZMBMMaYOLImFq1QJUN5pyc1dCOrrI2K5ELfgkbqadg%3D"></p>
+<p><strong>ステップ 2</strong></p>
+<p>コマンドライン プロンプトで、次のコマンドを入力して Enter キーを押します。</p>
+<pre><code class="language-bash prettyprint">git clone https://github.com/GoogleCloudPlatform/training-data-analyst &#x000A;</code></pre>
+<p><strong>ステップ 3</strong></p>
+<p>リポジトリのクローンが作成されたことを確認します。<code>training-data-analyst</code> ディレクトリをダブルクリックすると、作成された内容が表示されます。このディレクトリには、本コースのすべての Jupyter ノートブック ラボで使用するファイルが含まれています。</p>
+<p><img alt="training-data-analyst リポジトリ" src="https://cdn.qwiklabs.com/MQ6B0Lqw6lZfTGmlUilfeYl4smBjrzDRUKIVRZRMR00%3D"></p>
+
+<h2 id="step5">データ品質の改善</h2>
+<p><strong>ステップ 1</strong></p>
+<p>ノートブック インターフェースで、<strong>[training-data-analyst] &gt; [courses] &gt; [machine_learning] &gt; [deepdive2] &gt; [launching_into_ml] &gt; [labs]</strong> に移動して [<strong>improve_data_quality.ipynb</strong>] を開きます。</p>
+<p><strong>ステップ 2</strong></p>
+<p>ノートブック インターフェースで、<strong>[Edit] &gt; [Clear All Outputs]</strong> をクリックします。</p>
+<p>ノートブックの手順をよく読み、必要に応じてコードを入力する必要がある場所に「#TODO」のマークを付けた行を挿入します。</p>
+<ql-infobox><p><strong>ヒント</strong></p>
+<p>
+</p>
+<ul>
+<li>現在のセルを実行するには、そのセルをクリックして、<strong>Shift+Enter</strong> キーを押します。その他のセルコマンドは [<strong>Run</strong>] の下のノートブック UI 内にあります。
+</li>
+<li>
+タスクのヒントが指定されている場合もあります。ヒントのテキストは白いテキストで示されているため、選択してハイライト表示します。
+</li>
+<li>
+さらに情報が必要な場合は、<strong>[training-data-analyst] &gt; [courses] &gt; [machine_learning] &gt; [deepdive2] &gt; [launching_into_ml] &gt; [solutions]</strong> に移動して [<strong>improve_data_quality.ipynb</strong>] を開き、ソリューションの全体を見ることもできます。</li>
+</ul>
+
+</ql-infobox>
+<h2 id="step6">ラボを終了する</h2>
+<p>ラボでの学習が完了したら、[<strong>ラボを終了</strong>] をクリックします。ラボで使用したリソースが Qwiklabs から削除され、アカウントの情報も消去されます。</p>
+<p>ラボの評価を求めるダイアログが表示されたら、星の数を選択してコメントを入力し、[<strong>送信</strong>] をクリックします。</p>
+<p>星の数は、それぞれ次の評価を表します。</p>
+<ul>
+<li>星 1 つ = 非常に不満</li>
+<li>星 2 つ = 不満</li>
+<li>星 3 つ = どちらともいえない</li>
+<li>星 4 つ = 満足</li>
+<li>星 5 つ = 非常に満足</li>
+</ul>
+<p>フィードバックを送信しない場合は、ダイアログ ボックスを閉じてください。</p>
+<p>フィードバック、ご提案、修正が必要な箇所については、[<strong>サポート</strong>] タブからお知らせください。</p>
+
+<p>©2021 Google LLC All rights reserved. Google および Google のロゴは、Google LLC の商標です。その他すべての社名および製品名は、それぞれ該当する企業の商標である可能性があります。</p>
+
+
+
+</div>
+</div>
+
+
+<div class='lab-content__end-lab-button js-end-lab-button-container hidden'>
+<ql-lab-control-button class='js-end-lab-button' running></ql-lab-control-button>
+</div>
+<!-- / TODO: Move recommendations into the end lab modal -->
+</ql-drawer-content>
+<ql-drawer end id='outline-drawer' open slot='drawer' width='320'>
+<div class='lab-content__outline js-lab-content-outline'>
+<a href='#step1'>概要</a><a href='#step2'>設定</a><a href='#step3'>AI Platform Notebooks を起動する</a><a href='#step4'>AI Platform Notebooks インスタンス内でコース リポジトリのクローンを作成する</a><a href='#step5'>データ品質の改善</a><a href='#step6'>ラボを終了する</a>
+</div>
+</ql-drawer>
+</ql-drawer-container>
+</ql-drawer-content>
+</ql-drawer-container>
+
+
+
+</div>
+</main>
+
+
+<div class='modal fade' id='lab-details-modal'>
+<div class='modal-container'>
+<div class='modal-content mdl-shadow--24dp'>
+<div class='modal-body'>
+<p class='l-mbm'>
+このラボでは、整然としていないデータに関するよくある問題をいくつか提示して解決します。なお、問題が異なれば別の解決方法が必要になります。ここでは、このノートブック以外の問題については扱いません。
+</p>
+<p class='small-label l-mbs'>
+<strong>
+期間:
+</strong>
+0 分設定
+&middot;
+アクセス時間: 45 分
+&middot;
+完了までの時間: 30 分
+</p>
+<p class='small-label l-mbs'>
+<span><strong>レベル: </strong>introductory</span>
+</p>
+<p class='small-label'>
+<strong>
+パーマリンク:
+</strong>
+<a href="https://googlecoursera.qwiklabs.com/catalog_lab/2978">https://googlecoursera.qwiklabs.com/catalog_lab/2978</a>
+</p>
+</div>
+<div class='modal-actions'>
+<a class='button button--text' data-dismiss='modal'>
+Got It
+</a>
+</div>
+
+
+</div>
+</div>
+<iframe class='l-ie-iframe-fix'></iframe>
+</div>
+<div class='modal fade' id='lab-review-modal'>
+<div class='modal-container'>
+<div class='modal-content mdl-shadow--24dp'>
+<form class="simple_form js-lab-review-form" id="new_lab_review" action="/lab_reviews" accept-charset="UTF-8" data-remote="true" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><div class='modal-body'>
+<p class='label'>
+このラボに対する満足度を教えてください*
+</p>
+<div class='rateit js-rateit' data-rateit-max='5' data-rateit-min='0' data-rateit-resetable='false' data-rateit-step='1' data-rateit-value='0'></div>
+<div class='l-mtm'>
+
+<div class="control-group hidden lab_review_user_id"><div class="controls"><input class="hidden" type="hidden" value="2544031" name="lab_review[user_id]" id="lab_review_user_id" /></div></div>
+<div class="control-group hidden lab_review_classroom_id"><div class="controls"><input class="hidden" type="hidden" name="lab_review[classroom_id]" id="lab_review_classroom_id" /></div></div>
+<div class="control-group hidden lab_review_lab_id"><div class="controls"><input class="hidden" type="hidden" value="2978" name="lab_review[lab_id]" id="lab_review_lab_id" /></div></div>
+<div class="control-group hidden lab_review_focus_id"><div class="controls"><input class="hidden" type="hidden" name="lab_review[focus_id]" id="lab_review_focus_id" /></div></div>
+<div class="control-group hidden lab_review_rating"><div class="controls"><input class="hidden js-rating-input" type="hidden" name="lab_review[rating]" id="lab_review_rating" /></div></div>
+<div class="control-group text optional lab_review_comment"><label class="text optional control-label" for="lab_review_comment">コメント</label><div class="controls"><textarea class="text optional" name="lab_review[comment]" id="lab_review_comment">
+</textarea></div></div>
+</div>
+</div>
+<div class='modal-actions'>
+<a class='button button--text' data-dismiss='modal'>
+Cancel
+</a>
+<input type="submit" name="commit" value="送信" disabled="disabled" id="submit" data-disabled="false" class="button" data-disable-with="送信" />
+</div>
+</form>
+
+</div>
+</div>
+<iframe class='l-ie-iframe-fix'></iframe>
+</div>
+
+
+<script>
+  $( function() {
+    ql.initMaterialInputs();
+    initChosen();
+    initSearch();
+    initTabs();
+    ql.list.init();
+    ql.favoriting.init();
+    ql.header.myAccount.init();
+    initTooltips();
+    ql.autocomplete.init();
+    ql.modals.init();
+    ql.toggleButtons.init();
+    ql.analytics.init();
+    ql.labControlPanel.addRecaptchaErrorHandler();
+  initLabContent();
+  ql.labOutline.links.init();
+  initLabReviewModal();
+  ql.labAssessment.init();
+  ql.labData.init();
+  initLabTranslations( {"are_you_sure":"すべて完了しましたか。このラボを終了すると、作業内容がすべて失われます。割り当ての上限がある場合、ラボを再開できないことがあります。このラボを終了してもよろしいですか。","in_progress":"*進行中*","ending":"*終了しています*","starting":"*開始しています。しばらくお待ちください*","end_concurrent_labs":"一度に実行できるラボは 1 つだけです。このラボを開始するには、既存のラボをすべて終了してください。","copied":"コピーしました","no_resource":"リソースの取得中にエラーが発生しました。","no_support":"サポートなし","mac_press":"⌘+C キーを押してコピー","thanks_review":"このラボを評価していただきありがとうございました。","windows_press":"Ctrl+C キーを押すとコピーできます","days":"日"} );
+  ql.labRun.init();
+  ql.chat.init();
+  ql.initHeader();
+  ql.navigation.init();
+  ql.navPanel.init();
+  ql.navigation.init();
+  
+  });
+</script>
+
+</body>
+</html>
+
